@@ -118,7 +118,7 @@ const Carousel: React.FC = () => {
           className="
   relative
   w-full
-  h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px]
+  h-70 sm:h-90 md:h-112.5 lg:h-130
   transform-3d
   flex
   items-center
