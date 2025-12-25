@@ -1,0 +1,185 @@
+import React, { useState } from "react";
+
+type Slide = {
+  id: number;
+  image: string;
+};
+
+const slidesData: Slide[] = [
+  {
+    id: 1,
+    image:
+      "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 2,
+    image:
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 3,
+    image:
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 4,
+    image:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 5,
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+  },
+];
+
+const Carousel: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const numSlides = slidesData.length;
+
+  const handlePrev = () =>
+    setActiveIndex((p) => (p - 1 + numSlides) % numSlides);
+  const handleNext = () => setActiveIndex((p) => (p + 1) % numSlides);
+
+  const getStatus = (index: number) => {
+    let diff = index - activeIndex;
+    if (diff > numSlides / 2) diff -= numSlides;
+    else if (diff < -numSlides / 2) diff += numSlides;
+
+    if (diff === 0) return "active";
+    if (diff === 1 || (numSlides === 2 && diff === -1)) return "next";
+    if (diff === -1) return "prev";
+    if (diff === 2 || (numSlides === 4 && diff === -2))
+      return "background-next";
+    if (diff === -2) return "background-prev";
+    return "hidden";
+  };
+
+  return (
+    <>
+      <h1
+        className="
+        mb-16
+        mx-auto
+        font-bold
+        text-[32px]
+        leading-8.75
+        tracking-[0.2em]
+        text-center
+        text-white
+        uppercase"
+      >
+        WHAT’S IT LIKE WHEN WE HAVE EVENTS{" "}
+      </h1>
+      <div className="relative w-full mx-auto px-4 py-20 overflow-visible rounded-xl">
+        <style>{`
+        .slide {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transition: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+          will-change: transform, opacity;
+        }
+        .slide[data-status="active"] {
+          opacity: 1;
+          transform: translateY(0%) translateX(0%) translateZ(0px) scale(1);
+          z-index: 10;
+        }
+        .slide[data-status="next"] {
+          opacity: 0.8;
+          transform: translateY(0%) translateX(25%) translateZ(-100px) scale(0.8);
+          z-index: 9;
+        }
+        .slide[data-status="prev"] {
+          opacity: 0.8;
+          transform: translateY(0%) translateX(-25%) translateZ(-100px) scale(0.8);
+          z-index: 9;
+        }
+        .slide[data-status="background-next"] {
+          opacity: 0.6;
+          transform: translateY(0%) translateX(45%) translateZ(-200px) scale(0.6);
+          z-index: 8;
+        }
+        .slide[data-status="background-prev"] {
+          opacity:0.6;
+          transform: translateY(0%) translateX(-45%) translateZ(-200px) scale(0.6);
+          z-index: 8;
+        }
+        .slide[data-status="hidden"] {
+          opacity:0;
+          transform: translateY(0%) translateX(0%) translateZ(-300px) scale(0.5);
+          z-index: 1;
+          pointer-events: none;
+        }
+      `}</style>
+        <main className="relative w-full h-130 transform-3d flex items-center justify-center">
+          {slidesData.map((item, index) => (
+            <article
+              key={item.id}
+              data-status={getStatus(index)}
+              className="slide absolute w-[60%] h-full rounded-[40px] overflow-hidden shadow-2xl border border-white/10"
+            >
+              <img
+                src={item.image}
+                alt={`Slide ${item.id}`}
+                className="w-full h-full object-cover"
+              />
+            </article>
+          ))}
+        </main>
+
+        {/* Navigation UI based on Reference Image */}
+        <div className="mt-12 flex flex-col items-center gap-6">
+          <div className="flex items-center gap-8 text-white/70">
+            {/* Pagination Dots & Mini Arrows */}
+            <div className="flex items-center gap-4">
+              <button onClick={handlePrev} className="hover:text-white">
+                <svg
+                  width="19"
+                  height="18"
+                  viewBox="0 0 19 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M5.74264 7.06066H18.6213V10.0607H5.74264L10.682 15L8.56066 17.1213L0 8.56066L8.56066 0L10.682 2.12132L5.74264 7.06066Z"
+                    fill="#999999"
+                  />
+                </svg>
+              </button>
+              <div className="flex gap-2">
+                {slidesData.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-4 rounded-full transition-all duration-300 ${
+                      i === activeIndex ? "w-4 bg-[#7B61FF]" : "w-4 bg-white/20"
+                    }`}
+                  />
+                ))}
+              </div>
+              <button onClick={handleNext} className="hover:text-white">
+                <svg
+                  width="19"
+                  height="18"
+                  viewBox="0 0 19 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12.5537 10.443H0V7.32899H12.5537L7.73899 2.20194L9.80678 0L18.1514 8.88599L9.80678 17.772L7.73899 15.57L12.5537 10.443Z"
+                    fill="#999999"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Carousel;
