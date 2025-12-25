@@ -59,18 +59,21 @@ const Carousel: React.FC = () => {
     <>
       <h1
         className="
-        mb-16
-        mx-auto
-        font-bold
-        text-[32px]
-        leading-8.75
-        tracking-[0.2em]
-        text-center
-        text-white
-        uppercase"
+    mx-auto
+    mb-10 sm:mb-12 md:mb-16
+    text-center
+    uppercase
+    font-bold
+    text-white
+
+    text-lg sm:text-xl md:text-2xl lg:text-[32px]
+    leading-tight md:leading-snug
+    tracking-[0.15em] sm:tracking-[0.18em] md:tracking-[0.2em]
+  "
       >
-        WHAT’S IT LIKE WHEN WE HAVE EVENTS{" "}
+        WHAT’S IT LIKE WHEN WE HAVE EVENTS
       </h1>
+
       <div className="relative w-full mx-auto px-4 py-20 overflow-visible rounded-xl">
         <style>{`
         .slide {
@@ -111,12 +114,36 @@ const Carousel: React.FC = () => {
           pointer-events: none;
         }
       `}</style>
-        <main className="relative w-full h-130 transform-3d flex items-center justify-center">
+        <main
+          className="
+  relative
+  w-full
+  h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px]
+  transform-3d
+  flex
+  items-center
+  justify-center
+  overflow-hidden
+"
+        >
           {slidesData.map((item, index) => (
             <article
               key={item.id}
               data-status={getStatus(index)}
-              className="slide absolute w-[60%] h-full rounded-[40px] overflow-hidden shadow-2xl border border-white/10"
+              className="
+        slide
+        absolute
+        w-[90%] sm:w-[80%] md:w-[65%] lg:w-[60%]
+        h-full
+        rounded-3xl sm:rounded-4xl lg:rounded-[40px]
+        overflow-hidden
+        shadow-2xl
+        border
+        border-white/10
+        transition-all
+        duration-500
+        ease-out
+      "
             >
               <img
                 src={item.image}
@@ -128,49 +155,75 @@ const Carousel: React.FC = () => {
         </main>
 
         {/* Navigation UI based on Reference Image */}
-        <div className="mt-12 flex flex-col items-center gap-6">
-          <div className="flex items-center gap-8 text-white/70">
-            {/* Pagination Dots & Mini Arrows */}
-            <div className="flex items-center gap-4">
-              <button onClick={handlePrev} className="hover:text-white">
+        <div className="mt-8 sm:mt-10 lg:mt-12 flex flex-col items-center gap-4 sm:gap-6">
+          <div className="flex items-center text-white/70">
+            {/* Pagination Dots & Arrows */}
+            <div className="flex items-center gap-3 sm:gap-5 md:gap-8">
+              {/* Prev */}
+              <button
+                onClick={handlePrev}
+                className="
+          p-2 sm:p-3
+          hover:text-white
+          active:scale-95
+          transition
+        "
+                aria-label="Previous slide"
+              >
                 <svg
-                  width="19"
-                  height="18"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
                   viewBox="0 0 19 18"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M5.74264 7.06066H18.6213V10.0607H5.74264L10.682 15L8.56066 17.1213L0 8.56066L8.56066 0L10.682 2.12132L5.74264 7.06066Z"
-                    fill="#999999"
+                    fill="currentColor"
                   />
                 </svg>
               </button>
-              <div className="flex gap-2">
+
+              {/* Dots */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 {slidesData.map((_, i) => (
                   <div
                     key={i}
-                    className={`h-4 rounded-full transition-all duration-300 ${
-                      i === activeIndex ? "w-4 bg-[#7B61FF]" : "w-4 bg-white/20"
-                    }`}
+                    className={`
+              h-2 sm:h-2.5
+              rounded-full
+              transition-all duration-300
+              ${
+                i === activeIndex
+                  ? "w-6 sm:w-8 bg-[#7B61FF]"
+                  : "w-2 sm:w-2.5 bg-white/30"
+              }
+            `}
                   />
                 ))}
               </div>
-              <button onClick={handleNext} className="hover:text-white">
+
+              {/* Next */}
+              <button
+                onClick={handleNext}
+                className="
+          p-2 sm:p-3
+          hover:text-white
+          active:scale-95
+          transition
+        "
+                aria-label="Next slide"
+              >
                 <svg
-                  width="19"
-                  height="18"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
                   viewBox="0 0 19 18"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M12.5537 10.443H0V7.32899H12.5537L7.73899 2.20194L9.80678 0L18.1514 8.88599L9.80678 17.772L7.73899 15.57L12.5537 10.443Z"
-                    fill="#999999"
+                    fill="currentColor"
                   />
                 </svg>
               </button>

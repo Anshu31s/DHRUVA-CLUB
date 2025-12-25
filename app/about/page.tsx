@@ -6,22 +6,39 @@ import Footer from "../components/footer";
 const About: React.FC = () => {
   return (
     <div className="relative min-h-screen w-full text-white overflow-hidden bg-[url(/pexels-kai-pilger.jpg)] bg-contain bg-center">
-      
-      <h1 className="pt-50 ml-30 font-extrabold uppercase text-[40px] sm:text-[56px] md:text-[60px] lg:text-[120px] leading-tight max-w-6xl">
-          ABOUT US.
-        </h1>
-      <div className="flex flex-col lg:flex-row items-center justify-evenly space-x-20 px-40 ">
+
+      {/* Heading */}
+      <h1 className="
+        pt-24 sm:pt-32 lg:pt-40
+        px-6 sm:px-10 lg:px-20
+        font-extrabold uppercase
+        text-[36px] sm:text-[56px] md:text-[72px] lg:text-[120px]
+        leading-tight
+        max-w-7xl
+      ">
+        ABOUT US.
+      </h1>
+
+      {/* Content */}
+      <div className="
+        flex flex-col lg:flex-row
+        items-center
+        justify-between
+        gap-12 lg:gap-20
+        px-6 sm:px-10 lg:px-24
+        py-16
+      ">
         {/* Logo */}
         <div className="shrink-0">
           <img
             src="/Dhruva-logo.png"
             alt="Dhruva Logo"
-            className="w-100 max-w-full"
+            className="w-48 sm:w-64 lg:w-96 max-w-full mx-auto"
           />
         </div>
 
         {/* Text */}
-        <div className=" m-20 text-white text-2xl ">
+        <div className="text-base sm:text-lg lg:text-2xl leading-relaxed max-w-3xl">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
             voluptatem suscipit soluta laudantium, sapiente natus deleniti
@@ -40,18 +57,31 @@ const About: React.FC = () => {
           </p>
         </div>
       </div>
-       {/* Moon Image */}
+
+      {/* Moon Image */}
       <img
         src="/moon.svg"
         alt="Moon"
-        className="absolute top-190 z-10 -right-20  w-full sm:w-75 md:w-95 lg:w-115"
+        className="
+          absolute
+          right-[-30%] sm:right-[-15%] lg:right-[-8%]
+          top-[26%] lg:top-[22%]
+          w-64 sm:w-80 lg:w-md
+          pointer-events-none
+          z-10
+        "
       />
 
-      <img className="w-full mt-30" src="https://images.unsplash.com/photo-1531844251246-9a1bfaae09fc?" alt="" />
-    <TeamLeaders />
-    <Footer />
-    </div>
+      {/* Divider Image */}
+      <img
+        className="w-full mt-24"
+        src="https://images.unsplash.com/photo-1531844251246-9a1bfaae09fc?"
+        alt=""
+      />
 
+      <TeamLeaders />
+      <Footer />
+    </div>
   );
 };
 

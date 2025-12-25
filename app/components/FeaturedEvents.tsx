@@ -30,20 +30,20 @@ const events: Event[] = [
 
 const FeaturedEvents: React.FC = () => {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden py-32">
-      <div className="relative z-10 max-w-7xl mx-auto space-y-40">
+    <section className="w-full min-h-screen py-32">
+      <div className="max-w-7xl mx-auto space-y-40">
         {events.map((event, index) => {
           const isEven = index % 2 === 1;
 
           return (
             <div
               key={event.id}
-              className={`relative flex ${
-                isEven ? "justify-end" : "justify-start"
+              className={`relative flex  ${
+                isEven ? " justify-center md:justify-end" : " justify-center md:justify-start"
               }`}
             >
               {/* Event Image */}
-              <div className="relative w-220 h-175">
+              <div className="relative 110 md:w-220 h-87 md:h-175">
                 <img
                   src={event.image}
                   alt={event.title}
@@ -61,29 +61,29 @@ const FeaturedEvents: React.FC = () => {
 
                 {/* Glass Card */}
                 <div
-                  className={`absolute top-2/3 -translate-y-1/2 w-137.5 h-94.5 bg-white/50 backdrop-blur-md text-white p-8
-                  ${isEven ? "-left-40" : "-right-40"}`}
+                  className={`absolute  md:top-2/3 -translate-y-1/2 w-58 h-68 md:w-137.5 md:h-94.5 bg-white/50 backdrop-blur-md text-white p-8
+                  ${isEven ? "md:-left-40" : "md:-right-40"}`}
                 >
-                  <p className="text-[16px] tracking-widest">
+                  <p className="text-[8px] md:text-[16px] tracking-widest">
                     {event.date}
                   </p>
 
-                  <h3 className="text-[36px] font-bold uppercase mb-2 tracking-wide">
+                  <h3 className="text-[18px] md:text-[36px] font-bold uppercase mb-2 tracking-wide">
                     {event.title}
                   </h3>
 
-                  <p className="text-[18px] mb-2">
+                  <p className="text-[9px] md:text-[18px] mb-2">
                     {event.description}
                   </p>
 
-                  <button className="bg-white text-black text-sm px-4 py-2 font-semibold hover:bg-gray-200 transition">
+                  <button className="bg-white text-black text-sm px-2 md:px-4 py-1 md:py-2 font-semibold hover:bg-gray-200 transition">
                     Learn More
                   </button>
                 </div>
 
                 {/* Hashtag */}
                 <span
-                  className={`absolute top-0 text-white text-[32px] font-bold
+                  className={`absolute top-0 text-white text-[16px] md:text-[32px] font-bold
                   ${event.id === 1 ? "-right-90" : "-left-90"}`}
                 >
                   #{event.id}
